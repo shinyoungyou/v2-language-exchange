@@ -14,13 +14,7 @@ builder.Services.AddControllers(opt =>
     var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
     opt.Filters.Add(new AuthorizeFilter(policy));
 });
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
-builder.Services.AddDbContext<DataContext>(opt => 
-{
-    opt.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection"));
-});
+builder.Services.AddApplicationServices(builder.Configuration);
 builder.Services.AddIdentityServices(builder.Configuration);
 
 var app = builder.Build();
@@ -31,8 +25,12 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+// add cores before we get to Authorization.
+// The browser is going to send a pre flight request to see if cors is available.
+app.UseCors("CorsPolicy"); 
 
-app.UseAuthentication(); // Authentication always comes first
+// Authentication always comes first
+app.UseAuthentication(); 
 app.UseAuthorization();
 
 app.MapControllers();
