@@ -3,10 +3,6 @@ import agent from "../api/agent";
 import { User, UserFormValues } from "@/models/user";
 import { router } from "@/routes/Routes";
 import { store } from "./store";
-import { UserParams } from "@/models/userParams";
-import { string } from "yup";
-import { Creds } from "@/models/creds";
-
 
 export default class UserStore {
     user: User | null = null;
@@ -68,65 +64,5 @@ export default class UserStore {
         let birthday = new Date(dob);
         return new Date(birthday.setMinutes(birthday.getMinutes()-birthday.getTimezoneOffset()))
           .toISOString().slice(0,10);
-    }
-
-    setPhotoUrl = (photoUrl: string) => {
-        if (this.user) this.user.photoUrl = photoUrl;
-    }
-
-    setDisplayName = (name: string) => {
-        if (this.user) this.user.displayName = name;
-    }
-
-    changePassword = async (creds: Creds) => {
-        this.loading = true;
-        try {
-            const user = await agent.Account.changePassword(creds);
-            store.commonStore.setToken(user.token);
-            runInAction(() => {
-                this.user = user;
-                this.loading = false;
-            })
-        } catch (error) {
-            console.log(error);
-            runInAction(() => (this.loading = false));
-        }
-    }
-
-    googleLogin = async (accessToken: string) => {
-        try {
-            const user = await agent.Account.google(accessToken);
-            store.commonStore.setToken(user.token);
-            runInAction(() => {
-                this.user = user;
-            })
-        } catch (error) {
-            console.log(error);
-            
-        }
-    }
-
-    complete = async (creds: any) => {
-        try {
-            const birthday = this.getDateOnly(creds.birthday);
-            const values = { ...creds, birthday };
-            console.log('complete before');
-            
-            const user = await agent.Account.complete(values);
-            console.log('complete after');
-
-            store.commonStore.setToken(user.token);
-            runInAction(() => this.user = user);
-            router.navigate('/connect');
-            store.modalStore.closeModal();
-        } catch (error) {
-            throw error;
-        }
-    }
-
-    delete = async () => {
-        store.commonStore.setToken(null);
-        this.user = null;
-        router.navigate('/');
     }
 }
