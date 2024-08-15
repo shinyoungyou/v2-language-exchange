@@ -25,8 +25,6 @@ export default class UserStore {
             const user = await agent.Account.login(creds);
             store.commonStore.setToken(user.token);
             runInAction(() => this.user = user);
-            store.memberStore.setUserParams(new UserParams(this.user!));
-            store.presenceStore.createHubConnection(user);
             router.navigate('/connect');
             store.modalStore.closeModal();
         } catch (error) {
@@ -36,7 +34,6 @@ export default class UserStore {
 
     logout = () => {
         store.commonStore.setToken(null);
-        store.presenceStore.stopHubConnection();
         this.user = null;
         router.navigate('/');
     }
@@ -47,8 +44,6 @@ export default class UserStore {
             console.log(user);
             
             runInAction(() => this.user = user);
-            store.memberStore.setUserParams(new UserParams(this.user!));
-            store.presenceStore.createHubConnection(user);
         } catch (error) {
             console.log(error);
         }
@@ -61,8 +56,6 @@ export default class UserStore {
             const user = await agent.Account.register(values);
             store.commonStore.setToken(user.token);
             runInAction(() => this.user = user);
-            store.memberStore.setUserParams(new UserParams(this.user!));
-            store.presenceStore.createHubConnection(user);
             router.navigate('/connect');
             store.modalStore.closeModal();
         } catch (error) {
@@ -124,8 +117,6 @@ export default class UserStore {
 
             store.commonStore.setToken(user.token);
             runInAction(() => this.user = user);
-            store.memberStore.setUserParams(new UserParams(this.user!));
-            store.presenceStore.createHubConnection(user);
             router.navigate('/connect');
             store.modalStore.closeModal();
         } catch (error) {
@@ -135,9 +126,7 @@ export default class UserStore {
 
     delete = async () => {
         store.commonStore.setToken(null);
-        store.presenceStore.stopHubConnection();
         this.user = null;
-        store.memberStore.members.filter(u => u.username !== this.user?.username);
         router.navigate('/');
     }
 }

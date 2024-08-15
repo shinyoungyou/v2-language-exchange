@@ -1,14 +1,9 @@
-import {
-  Button,
-  Container,
-  Dropdown,
-  Menu,
-  Image,
-  Header,
-} from "semantic-ui-react";
+import {  Container, Dropdown, Menu, Image, Header } from "semantic-ui-react";
 import { Link, NavLink } from "react-router-dom";
 import { useStore } from "@/stores/store";
 import { observer } from "mobx-react-lite";
+import logo from "@/assets/img/logo.png";
+import user_img from "@/assets/img/user.png";
 
 interface Props {
   content: string;
@@ -24,7 +19,7 @@ export default observer(function HeaderMenu({ content }: Props) {
 
         <Menu.Item position="left" as={NavLink} to='/'>
         <img
-            src={require("@/assets/img/logo.png")}
+            src={logo}
             alt="logo"
             style={{ marginRight: 10 }}
           />
@@ -38,7 +33,7 @@ export default observer(function HeaderMenu({ content }: Props) {
           <Image
             avatar
             spaced="right"
-            src={user?.photoUrl || require("@/assets/img/user.png")}
+            src={user?.photoUrl || user_img}
           />
           <Dropdown pointing="top right" text={user?.displayName}>
             <Dropdown.Menu>

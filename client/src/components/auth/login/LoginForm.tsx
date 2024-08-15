@@ -3,16 +3,10 @@ import { observer } from "mobx-react-lite";
 import { Button, Container, Header, Label } from "semantic-ui-react";
 import MyTextInput from "@/components/common/form/MyTextInput";
 import { useStore } from "@/stores/store";
-import { useState } from "react";
 import * as Yup from "yup";
 
 export default observer(function LoginForm() {
   const { userStore } = useStore();
-  const [captchaIsDone, setCaptchaIsDone] = useState(false);
-
-  const onChange = () => {
-    setCaptchaIsDone(true);
-  };
 
   const validationSchema = Yup.object({
     email: Yup.string().email('Invalid email format').required('Email is required'),
@@ -62,7 +56,7 @@ export default observer(function LoginForm() {
             />
           
             <Button
-              disabled={!isValid || !dirty || isSubmitting || !captchaIsDone}
+              disabled={!isValid || !dirty || isSubmitting}
               loading={errors == null && isSubmitting}
               positive
               content="Login"
