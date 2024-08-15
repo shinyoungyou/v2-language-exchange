@@ -1,6 +1,6 @@
 import axios, { AxiosError, AxiosResponse } from 'axios';
 import { toast } from 'react-toastify';
-import { User, UserFormValues } from '../models/user';
+import { User, UserFormValues } from '@/models/user';
 import { router } from '@/routes/Routes';
 import { store } from '@/stores/store';
 import { Creds } from '@/models/creds';

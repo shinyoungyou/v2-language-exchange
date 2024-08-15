@@ -1,6 +1,5 @@
 import { makeAutoObservable, reaction } from "mobx";
 import { ServerError } from "@/models/serverError";
-import LoadingComponent from '../components/layout/LoadingComponent';
 
 export default class CommonStore {
     error: ServerError | null = null;

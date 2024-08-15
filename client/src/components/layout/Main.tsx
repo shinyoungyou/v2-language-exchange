@@ -1,4 +1,3 @@
-import { Container } from "semantic-ui-react";
 import NavBar from "@/components/layout/NavBar";
 import { observer } from "mobx-react-lite";
 import { Outlet } from "react-router-dom";

@@ -1,5 +1,4 @@
 import { observer } from "mobx-react-lite";
-import React from "react";
 import { Link } from "react-router-dom";
 import {
   Button,
@@ -14,7 +13,7 @@ import LoginForm from "@/components/auth/login/LoginForm";
 import Register from "@/components/auth/register/Register";
 
 import HomeAbout from "@/components/home/AboutPage";
-import logo from "../../assets/img/logo.png"
+import logo from "@/assets/img/logo.png"
 
 export default observer(function HomePage() {
   const { userStore, modalStore } = useStore();

@@ -1,5 +1,3 @@
-import { Container, Header } from "semantic-ui-react";
-import NavBar from "@/components/layout/NavBar";
 import { observer } from "mobx-react-lite";
 import { Outlet, ScrollRestoration, useLocation } from "react-router-dom";
 import HomePage from "@/components/home/HomePage";
@@ -8,7 +6,6 @@ import { useStore } from "@/stores/store";
 import { useEffect } from "react";
 import LoadingComponent from "@/components/layout/LoadingComponent";
 import ModalContainer from "@/components/common/modals/ModalContainer";
-import HeaderMenu from "./HeaderMenu";
 
 function App() {
   const location = useLocation();
