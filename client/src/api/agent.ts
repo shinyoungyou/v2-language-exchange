@@ -3,7 +3,6 @@ import { toast } from 'react-toastify';
 import { User, UserFormValues } from '@/models/user';
 import { router } from '@/routes/Routes';
 import { store } from '@/stores/store';
-import { Creds } from '@/models/creds';
 
 const sleep = (delay: number) => {
     return new Promise((resolve) => {
@@ -11,7 +10,7 @@ const sleep = (delay: number) => {
     })
 }
 
-axios.defaults.baseURL = import.meta.env.REACT_APP_API_URL;
+axios.defaults.baseURL = import.meta.env.VITE_API_URL;
 
 const responseBody = <T>(response: AxiosResponse<T>) => response.data;
 
@@ -22,7 +21,7 @@ axios.interceptors.request.use(config => {
 })
 
 axios.interceptors.response.use(async response => {
-    if (process.env.NODE_ENV === 'development') await sleep(1000);
+    if (import.meta.env.DEV) await sleep(1000);    
     return response;
 }, (error: AxiosError) => {
     const { data, status, config } = error.response as AxiosResponse;
@@ -71,12 +70,6 @@ const requests = {
 const Account = {
     current: () => requests.get<User>('/account'),
     login: (user: UserFormValues) => requests.post<User>('/account/login', user),
-    register: (user: UserFormValues) => requests.post<User>('/account/register', user),
-    google: (accessToken: string) => 
-        requests.post<User>(`/account/google?accessToken=${accessToken}`, {}),
-    complete: (user: any) => requests.post<User>('/account/complete', user),
-    changePassword: (creds: Creds) => requests.patch<User>(`/account/password`, creds),
-    delete: () => requests.del<void>(`/account`),
 }
 
 const agent = {
