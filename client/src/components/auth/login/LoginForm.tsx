@@ -27,7 +27,9 @@ export default observer(function LoginForm() {
       {({ handleSubmit, isSubmitting, errors, isValid, dirty }) => (
         <Container text>
           <ul>
-            <li>email: bob@test.com</li>
+            <li>email: cybill@wired.com</li>
+            <li>password: Pa$$w0rd</li>
+            <li>email: krystal@cdc.gov</li>
             <li>password: Pa$$w0rd</li>
           </ul>
           <Form className="ui form" onSubmit={handleSubmit} autoComplete="off">
