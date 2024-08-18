@@ -13,4 +13,12 @@ export interface Member {
     interests: string;
     city: string;
     country: string;
+    photos: Photo[];
 }
+
+export interface Photo {
+    id: string;
+    url: string;
+    isMain: boolean;
+  }
+  
