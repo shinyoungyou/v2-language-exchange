@@ -10,7 +10,7 @@ export class UserParams {
         if (user?.gender === null) {
             this.gender = 'All';
         } else {
-            this.gender = user?.gender === 'Female' ? 'Male' : 'Female'
+            this.gender = user?.gender === 'Female' ? 'Female' : 'Male'
         }
     }
 }
