@@ -3,7 +3,7 @@ import { Link, NavLink } from "react-router-dom";
 import { useStore } from "@/stores/store";
 import { observer } from "mobx-react-lite";
 import logo from "@/assets/img/logo.png";
-import user_img from "@/assets/img/user.png";
+import user_avatar from "@/assets/img/user.png";
 
 interface Props {
   content: string;
@@ -33,7 +33,7 @@ export default observer(function HeaderMenu({ content }: Props) {
           <Image
             avatar
             spaced="right"
-            src={user?.photoUrl || user_img}
+            src={user?.photoUrl || user_avatar}
           />
           <Dropdown pointing="top right" text={user?.displayName}>
             <Dropdown.Menu>

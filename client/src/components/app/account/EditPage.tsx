@@ -3,7 +3,7 @@ import EditProfile from "./EditProfile";
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import LoadingComponent from "@/components/layout/LoadingComponent";
-import { useStore } from "@//stores/store";
+import { useStore } from "@/stores/store";
 import HeaderDetail from "@/components/layout/HeaderDetail";
 import { Container } from "semantic-ui-react";
 import ProfileHeader from "../profile/ProfileHeader";
