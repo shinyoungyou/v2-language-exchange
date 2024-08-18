@@ -30,7 +30,8 @@ namespace Application.Members
             public async Task<Result<Member>> Handle(Query request, CancellationToken cancellationToken)
             {
                 var user = await _context.Users
-                    .Where(x => x.UserName == request.Username)
+                    .Where(u => u.UserName == request.Username)
+                    // _context.Users.ProjectTo<Member>: AppUser -> Member
                     .ProjectTo<Member>(_mapper.ConfigurationProvider, new { currentUsername = _userAccessor.GetUsername() })   
                     .SingleOrDefaultAsync();
 

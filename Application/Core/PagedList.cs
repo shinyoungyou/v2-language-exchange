@@ -4,8 +4,8 @@ namespace Application.Core
 {
     public class PagedList<T> : List<T>
     {
-        // pageList(10, 10, 2, 4)
-        // TotalPages = 10 / 4 = (int) 2.5 = 3
+        // pageList([10 of items], 10, 2, 4)
+        // TotalPages = 10 / 4 = (int) Math.Ceiling(2.5) = 3
         // items = (2 - 1) * 4 = 4
         // Skip(4).Take(4) // { 5, 6, 7, 8 }
         public PagedList(IEnumerable<T> items, int count, int pageNumber, int pageSize)
