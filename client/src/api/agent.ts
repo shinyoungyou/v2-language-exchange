@@ -3,6 +3,8 @@ import { toast } from 'react-toastify';
 import { User, UserFormValues } from '@/models/user';
 import { router } from '@/routes/Routes';
 import { store } from '@/stores/store';
+import { PaginatedResult } from '@/models/pagination';
+import { Member } from '@/models/member';
 
 const sleep = (delay: number) => {
     return new Promise((resolve) => {
@@ -22,6 +24,11 @@ axios.interceptors.request.use(config => {
 
 axios.interceptors.response.use(async response => {
     if (import.meta.env.DEV) await sleep(1000);    
+    const pagination = response.headers['pagination'];
+    if (pagination) {
+        response.data = new PaginatedResult(response.data, JSON.parse(pagination));
+        return response as AxiosResponse<PaginatedResult<any>>
+    }
     return response;
 }, (error: AxiosError) => {
     const { data, status, config } = error.response as AxiosResponse;
@@ -73,8 +80,16 @@ const Account = {
     register: (user: UserFormValues) => requests.post<User>('/account/register', user),
 }
 
+const Members = {
+    list: (params: URLSearchParams) => axios.get<PaginatedResult<Member[]>>('/members', { params })
+        .then(responseBody),
+    details: (username: string) => requests.get<Member>(`/members/${username}`),
+    update: (member: Partial<Member>) => requests.put<void>(`/members`, member),
+}
+
 const agent = {
     Account,
+    Members
 }
 
 export default agent;
