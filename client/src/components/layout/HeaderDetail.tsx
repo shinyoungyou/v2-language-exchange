@@ -22,9 +22,9 @@ interface Props {
 export default observer(function HeaderDetail({ member }: Props) {
   const {
     memberStore: { isCurrentUser },
-    presenceStore,
+    // presenceStore,
   } = useStore();
-  const { onlineUsers } = presenceStore;
+  // const { onlineUsers } = presenceStore;
 
   const navigate = useNavigate();
 
@@ -37,13 +37,13 @@ export default observer(function HeaderDetail({ member }: Props) {
         <div className="headerUsername">
           <h3 className="profileHeading">{member?.username}</h3>
           <p className="profileHeading">
-            {onlineUsers.find(username => username === member.username)? (
+            {/* {onlineUsers.find(username => username === member.username)? ( */}
               <>
                 <Label circular color="olive" empty /> Active now
               </>
-            ) : (
+            {/* ) : (
               `Active ${formatDistanceToNow(new Date(member.lastActive))} ago`
-            )}
+            )} */}
           </p>
         </div>
 
