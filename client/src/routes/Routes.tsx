@@ -8,6 +8,7 @@ import ServerError from '@/components/errors/ServerError';
 import App from '@/components/layout/App';
 import RequireAuth from './RequireAuth';
 import Main from '@/components/layout/Main';
+import EditPage from '@/components/app/account/EditPage';
 import ProfilePage from '@/components/app/profile/ProfilePage';
 import MessageDashboard from '@/components/app/messages/MessageDashboard';
 import LocationDashboard from '@/components/app/location/LocationDashboard';
@@ -32,6 +33,8 @@ export const routes: RouteObject[] = [
                 },
                
                 {path: 'members/:username', element: <ProfilePage />},
+                // {path: 'members/:username/messages', element: <ConnectMessage />},
+                {path: 'edit/:username', element: <EditPage />},
             ]},
             {path: 'not-found', element: <NotFound />},
             {path: 'server-error', element: <ServerError />},
