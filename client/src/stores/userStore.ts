@@ -69,4 +69,9 @@ export default class UserStore {
         return new Date(birthday.setMinutes(birthday.getMinutes()-birthday.getTimezoneOffset()))
           .toISOString().slice(0,10);
     }
+
+    // instant reflection
+    setDisplayName = (name: string) => {
+        if (this.user) this.user.displayName = name;
+    }
 }

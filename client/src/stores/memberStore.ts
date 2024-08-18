@@ -98,6 +98,29 @@ export default class memberStore {
     }
   };
 
+
+  updateMember = async (member: Partial<Member>) => {
+    this.loading = true;
+    try {
+      await agent.Members.update(member);
+      runInAction(() => {
+        if (
+          member.displayName &&
+          member.displayName !== store.userStore.user?.displayName
+        ) {
+          store.userStore.setDisplayName(member.displayName);
+        }
+        if (member !== null) {
+          this.member = { ...this.member, ...member } as Member
+        };
+        this.loading = false;
+      });
+    } catch (error) {
+      console.log(error);
+      runInAction(() => (this.loading = false));
+    }
+  };
+
   setPagination = (pagination: Pagination) => {
     this.pagination = pagination;
   }
