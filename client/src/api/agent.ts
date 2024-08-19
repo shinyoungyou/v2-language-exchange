@@ -33,11 +33,11 @@ axios.interceptors.response.use(async response => {
 }, (error: AxiosError) => {
     console.log(error);
     
-    const { data, status, config } = error.response as AxiosResponse;
+    const { data, status } = error.response as AxiosResponse;
     switch (status) {
         case 400:
-            // Validation Error
             if (data.errors) {
+                // Validation Error
                 const modalStateErrors = [];
                 
                 for (const key in data.errors) {
@@ -49,6 +49,7 @@ axios.interceptors.response.use(async response => {
                 
                 throw modalStateErrors.flat();
             } else {
+                // Bad Request
                 toast.error(data);
             }
             break;
