@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 import { NativeFlag, LearnFlag } from "@/components/common/options/flagHelper";
 import user_avatar from "@/assets/img/user.png"
 
-export default observer(function ActivityList() {
+export default observer(function MemberList() {
   const { memberStore } = useStore();
   const { members } = memberStore;
 

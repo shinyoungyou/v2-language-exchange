@@ -4,10 +4,14 @@ import { ErrorMessage, Form, Formik } from "formik";
 import MyTextInput from "@/components/common/form/MyTextInput";
 import { useStore } from "@/stores/store";
 import MySelectInput from "@/components/common/form/MySelectInput";
-import { languageOptions, levelOptions } from "@/components/common/options/categoryOptions";
+import {
+  languageOptions,
+  levelOptions,
+} from "@/components/common/options/categoryOptions";
 import * as Yup from "yup";
 import { Member } from "@/models/member";
 import MyTextAreaInput from "../../common/form/MyTextArea";
+import ValidationError from "@/components/errors/ValidationError";
 
 interface Props {
   member: Member;
@@ -42,11 +46,12 @@ export default observer(function ProfileSettings({ member }: Props) {
         initialValues={initialValues}
         validationSchema={validationSchema}
         onSubmit={(values, { setErrors }) =>
-          memberStore
-            .updateMember(values)
-            .catch((error) => setErrors({ error: "Failed to update profile" }))
+          memberStore.updateMember(values).catch((error) => {
+            console.log(error);
+            setErrors({ error });
+          })
         }
-      >
+      >p
         {({ handleSubmit, isSubmitting, errors, isValid, dirty, values }) => (
           <Form className="ui form" onSubmit={handleSubmit} autoComplete="off">
             <Segment.Group>
@@ -76,6 +81,10 @@ export default observer(function ProfileSettings({ member }: Props) {
                 <MyTextAreaInput placeholder="Bio" name="bio" rows={5} />
                 <Header content="Interest" sub color="teal" />
                 <MyTextInput placeholder="Interest" name="interests" />
+                <ErrorMessage
+                  name="error"
+                  render={() => <ValidationError errors={errors.error} />}
+                />
                 <Button
                   disabled={!isValid || !dirty || isSubmitting}
                   loading={isSubmitting}
@@ -86,17 +95,6 @@ export default observer(function ProfileSettings({ member }: Props) {
                 />
               </Segment>
             </Segment.Group>
-            <ErrorMessage
-              name="error"
-              render={() => (
-                <Label
-                  style={{ marginBottom: 10 }}
-                  basic
-                  color="red"
-                  content={errors.error}
-                />
-              )}
-            />
           </Form>
         )}
       </Formik>
