@@ -2,6 +2,8 @@ using API.Services;
 using Application.Core;
 using Application.Interfaces;
 using Application.Members;
+using FluentValidation;
+using FluentValidation.AspNetCore;
 using Infrastructure.Security;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -45,9 +47,12 @@ namespace API.Extensions
             });
             services.AddMediatR(typeof(List.Handler));
             services.AddAutoMapper(typeof(AutoMapperProfiles).Assembly);
+            services.AddFluentValidationAutoValidation();
+            services.AddValidatorsFromAssemblyContaining<Edit>();
             services.AddScoped<TokenService>();
             services.AddHttpContextAccessor();
             services.AddScoped<IUserAccessor, UserAccessor>();
+   
 
             return services;
         }
