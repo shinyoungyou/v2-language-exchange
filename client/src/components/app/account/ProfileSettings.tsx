@@ -51,7 +51,7 @@ export default observer(function ProfileSettings({ member }: Props) {
             setErrors({ error });
           })
         }
-      >p
+      >
         {({ handleSubmit, isSubmitting, errors, isValid, dirty, values }) => (
           <Form className="ui form" onSubmit={handleSubmit} autoComplete="off">
             <Segment.Group>
