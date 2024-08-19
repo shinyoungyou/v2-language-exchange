@@ -91,6 +91,7 @@ export default class memberStore {
         this.loadingMember = false;
       });
     } catch (error) {
+      // if there's no user that has such username
       toast.error("Problem loading member");
       runInAction(() => {
         this.loadingMember = false;
@@ -115,9 +116,11 @@ export default class memberStore {
         };
         this.loading = false;
       });
-    } catch (error) {
+    } catch (error: any) {
       console.log(error);
       runInAction(() => (this.loading = false));
+      toast.error("Problem updating member");
+      throw error;
     }
   };
 
