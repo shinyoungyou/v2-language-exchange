@@ -32,7 +32,7 @@ export default observer(function ProfilePhotos({ member }: Props) {
   return (
     <div className="profilePhotos">
       <Image.Group size="small">
-        {/* {member.photos.map((p) => (
+        {member.photos.map((p) => (
           <span key={p.id} className={isCurrentUser ? "isCurrentUser hoverActions": "hoverActions"}>
             <Image
               label={
@@ -45,20 +45,20 @@ export default observer(function ProfilePhotos({ member }: Props) {
               <Button 
                 name={p.id} 
                 loading={target === p.id && loading}
-                onClick={e => handleSetMain(p, e)}
+                // onClick={e => handleSetMain(p, e)}
                 icon>
                 <Icon name="star" color="blue" disabled={p.isMain} />
               </Button>
               <Button
                 name={p.id} 
-                // loading={target === p.id && loading}
-                onClick={e => handleDeletePhoto(p, e)}
+                loading={target === p.id && loading}
+                // onClick={e => handleDeletePhoto(p, e)}
                 icon>
                 <Icon name="delete" color="red" />
               </Button>
             </Button.Group>
           </span>
-        ))} */}
+        ))}
         {isCurrentUser && (
           <Image>
             <button
