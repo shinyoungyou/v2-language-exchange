@@ -24,15 +24,16 @@ namespace API.Extensions
                 var env = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
 
                 string connStr;
+                connStr = config.GetConnectionString("DefaultConnection");
 
-                // Depending on if in development or production, use either FlyIO
-                // connection string, or development connection string from env var.
-                if (env == "Development")
-                {
-                    // Use connection string from file.
-                    connStr = config.GetConnectionString("DefaultConnection");
-                    opt.UseSqlite(connStr);
-                }
+                // if (env == "Development")
+                // {
+                //     opt.UseSqlite(connStr);
+                // }
+                // else
+                // {
+                    opt.UseSqlServer(connStr);
+                // }
             });
             services.AddCors(opt => 
             {
