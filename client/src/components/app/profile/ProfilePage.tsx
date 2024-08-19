@@ -7,7 +7,6 @@ import ProfileHeader from "./ProfileHeader";
 import ProfileBody from "./ProfileBody";
 import HeaderDetail from "@/components/layout/HeaderDetail";
 import { Container } from "semantic-ui-react";
-import { Member } from "@/models/member";
 
 export default observer(function ProfilePage() {
   const { username } = useParams();

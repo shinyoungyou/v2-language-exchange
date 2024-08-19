@@ -1,7 +1,7 @@
 import { Member } from "@/models/member";
 import { observer } from "mobx-react-lite";
 import { Header, Image, Icon, Button } from "semantic-ui-react";
-import { SyntheticEvent, useEffect, useState } from "react";
+// import { SyntheticEvent, useEffect, useState } from "react";
 import { useStore } from "@/stores/store";
 // import AddPhotoForm from "../../common/imageUpload/AddPhotoForm";
 
@@ -11,13 +11,14 @@ interface Props {
 
 export default observer(function ProfilePhotos({ member }: Props) {
   const {
-    modalStore,
+    // modalStore,
     memberStore: { isCurrentUser, 
       // setMainPhoto, deletePhoto, 
-      loading },
+      // loading 
+    },
   } = useStore();
 
-  const [target, setTarget] = useState('');
+  // const [target, setTarget] = useState('');
 
   // function handleSetMain(photo: Photo, e: SyntheticEvent<HTMLButtonElement>) {
   //   setTarget(e.currentTarget.name);
@@ -44,14 +45,14 @@ export default observer(function ProfilePhotos({ member }: Props) {
             <Button.Group>
               <Button 
                 name={p.id} 
-                loading={target === p.id && loading}
+                // loading={target === p.id && loading}
                 // onClick={e => handleSetMain(p, e)}
                 icon>
                 <Icon name="star" color="blue" disabled={p.isMain} />
               </Button>
               <Button
                 name={p.id} 
-                loading={target === p.id && loading}
+                // loading={target === p.id && loading}
                 // onClick={e => handleDeletePhoto(p, e)}
                 icon>
                 <Icon name="delete" color="red" />

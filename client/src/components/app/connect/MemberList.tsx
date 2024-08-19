@@ -1,8 +1,6 @@
 import { observer } from "mobx-react-lite";
-import { Fragment } from "react";
-import { Button, Icon, Label } from "semantic-ui-react";
+import { Label } from "semantic-ui-react";
 import { useStore } from "@/stores/store";
-import MemberListItem from "./MemberListItem";
 import { Comment } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 import { NativeFlag, LearnFlag } from "@/components/common/options/flagHelper";

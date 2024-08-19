@@ -1,19 +1,16 @@
 import {
-  Button,
   Container,
   Dropdown,
   Menu,
-  Image,
-  Header,
   Icon,
   Label,
 } from "semantic-ui-react";
-import { Link, NavLink, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useStore } from "@/stores/store";
 import { observer } from "mobx-react-lite";
-import memberStore from "../../stores/memberStore";
+// import memberStore from "../../stores/memberStore";
 import { Member } from "@/models/member";
-import { formatDistanceToNow } from "date-fns";
+// import { formatDistanceToNow } from "date-fns";
 
 interface Props {
   member: Member;

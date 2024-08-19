@@ -1,11 +1,10 @@
 import { observer } from "mobx-react-lite";
 import { useStore } from "@/stores/store";
 import { Button, Input, Icon, Image, Label, Header } from "semantic-ui-react";
-import { Formik, Form } from "formik";
 import { UserParams } from "@/models/userParams";
 import { useState, useEffect } from "react";
 
-import TooltipSlider, { handleRender } from "@/components/common/TooltipSlider";
+import TooltipSlider from "@/components/common/TooltipSlider";
 import "rc-slider/assets/index.css";
 
 export default observer(function MemberFilters() {

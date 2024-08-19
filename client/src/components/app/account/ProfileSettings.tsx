@@ -1,5 +1,5 @@
 import { observer } from "mobx-react-lite";
-import { Header, Segment, Label, Button } from "semantic-ui-react";
+import { Header, Segment, Button } from "semantic-ui-react";
 import { ErrorMessage, Form, Formik } from "formik";
 import MyTextInput from "@/components/common/form/MyTextInput";
 import { useStore } from "@/stores/store";
@@ -19,7 +19,7 @@ interface Props {
 
 export default observer(function ProfileSettings({ member }: Props) {
   const { memberStore } = useStore();
-  const { loading } = memberStore;
+  // const { loading } = memberStore;
 
   const initialValues = {
     displayName: member.displayName,
