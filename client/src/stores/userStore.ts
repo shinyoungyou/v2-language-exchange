@@ -70,6 +70,10 @@ export default class UserStore {
           .toISOString().slice(0,10);
     }
 
+    setPhotoUrl = (photoUrl: string) => {
+        if (this.user) this.user.photoUrl = photoUrl;
+    }
+
     // instant reflection
     setDisplayName = (name: string) => {
         if (this.user) this.user.displayName = name;

@@ -1,6 +1,6 @@
-import { Member } from "../models/member";
+import { Member, Photo } from "@/models/member";
 import { makeAutoObservable, reaction, runInAction } from "mobx";
-import agent from "../api/agent";
+import agent from "@/api/agent";
 import { toast } from "react-toastify";
 import { store } from "./store";
 import { UserParams } from "@/models/userParams";
@@ -78,6 +78,7 @@ export default class memberStore {
     } catch (error) {
       console.log(error);
       this.setLoadingInitial(false);
+      throw error
     }
   };
 
@@ -151,4 +152,63 @@ export default class memberStore {
      || m.country.toLowerCase().includes(value.toLowerCase())
     );
   }
+
+  uploadPhoto = async (file: any) => {
+    this.uploading = true;
+    try {
+      const response = await agent.Members.uploadPhoto(file);
+      const photo = response.data;
+      runInAction(() => {
+        if (this.member) {
+          this.member.photos?.push(photo);
+          if (photo.isMain && store.userStore.user) {
+            store.userStore.setPhotoUrl(photo.url);
+            this.member.photoUrl = photo.url;
+          }
+        }
+        this.uploading = false;
+      });
+      store.modalStore.closeModal();
+    } catch (error) {
+      console.log(error);
+      runInAction(() => (this.uploading = false));
+    }
+  };
+
+  setMainPhoto = async (photo: Photo) => {
+    this.loading = true;
+    try {
+      await agent.Members.setMainPhoto(photo.id);
+      store.userStore.setPhotoUrl(photo.url);
+      runInAction(() => {
+        if (this.member && this.member.photos) {
+          this.member.photos.find(p => p.isMain)!.isMain = false;
+          this.member.photos.find(p => p.id === photo.id)!.isMain = true;
+          this.member.photoUrl = photo.url;
+          this.loading = false;
+        }
+      });
+    } catch (error) {
+      console.log(error);
+      runInAction(() => (this.loading = false));
+    }
+  };
+
+  deletePhoto = async (photo: Photo) => {
+    this.loading = true;
+    try {
+      await agent.Members.deletePhoto(photo.id);
+      runInAction(() => {
+        if (this.member) {
+          this.member.photos = this.member.photos?.filter(
+            (a) => a.id !== photo.id
+          );
+          this.loading = false;
+        }
+      });
+    } catch (error) {
+      toast.error("Problem deleting photo");
+      this.loading = false;
+    }
+  };
 }
