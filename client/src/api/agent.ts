@@ -4,7 +4,7 @@ import { User, UserFormValues } from '@/models/user';
 import { router } from '@/routes/Routes';
 import { store } from '@/stores/store';
 import { PaginatedResult } from '@/models/pagination';
-import { Member } from '@/models/member';
+import { Member, Photo } from '@/models/member';
 
 const sleep = (delay: number) => {
     return new Promise((resolve) => {
@@ -89,6 +89,16 @@ const Members = {
         .then(responseBody),
     details: (username: string) => requests.get<Member>(`/members/${username}`),
     update: (member: Partial<Member>) => requests.put<void>(`/members`, member),
+
+    uploadPhoto: (file: any) => {
+        let formData = new FormData();
+        formData.append('File', file);
+        return axios.post<Photo>('photos', formData, {
+            headers: { 'Content-Type': 'multipart/form-data' }
+        })
+    },
+    setMainPhoto: (id: string) => requests.post(`/photos/${id}/setMain`, {}),
+    deletePhoto: (id: string) => requests.del(`/photos/${id}`),
 }
 
 const agent = {
