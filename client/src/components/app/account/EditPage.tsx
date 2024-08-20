@@ -6,7 +6,7 @@ import LoadingComponent from "@/components/layout/LoadingComponent";
 import { useStore } from "@/stores/store";
 import HeaderDetail from "@/components/layout/HeaderDetail";
 import { Container } from "semantic-ui-react";
-import ProfileHeader from "../profile/ProfileHeader";
+import ProfileHeader from "@/components/app/profile/ProfileHeader";
 
 export default observer(function EditPage() {
   const { username } = useParams();
