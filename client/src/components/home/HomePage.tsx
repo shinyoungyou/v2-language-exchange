@@ -28,7 +28,7 @@ export default observer(function HomePage() {
               alt="logo"
               style={{ marginBottom: 12 }}
             />{" "}
-            language exchange
+            language exchange!!!
             <Header.Subheader>
               Practice any language, anytime, with people from all across the
               globe!
