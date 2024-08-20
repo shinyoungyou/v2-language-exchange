@@ -4,6 +4,7 @@ using Application.Interfaces;
 using Application.Members;
 using FluentValidation;
 using FluentValidation.AspNetCore;
+using Infrastructure.Photos;
 using Infrastructure.Security;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -21,7 +22,7 @@ namespace API.Extensions
             services.AddSwaggerGen();
             services.AddDbContext<DataContext>(opt => 
             {
-                var env = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
+                // var env = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
 
                 string connStr;
                 connStr = config.GetConnectionString("DefaultConnection");
@@ -47,14 +48,15 @@ namespace API.Extensions
                 });
             });
             services.AddMediatR(typeof(List.Handler));
+            services.AddScoped<TokenService>();
             services.AddAutoMapper(typeof(AutoMapperProfiles).Assembly);
             services.AddFluentValidationAutoValidation();
             services.AddValidatorsFromAssemblyContaining<Edit>();
-            services.AddScoped<TokenService>();
             services.AddHttpContextAccessor();
             services.AddScoped<IUserAccessor, UserAccessor>();
+            services.AddScoped<IPhotoAccessor, PhotoAccessor>();
+            services.Configure<AzureBlobStorage>(config.GetSection("AzureBlobStorage"));
    
-
             return services;
         }
     }

@@ -12,6 +12,7 @@ namespace Persistence
             {
                 var userData = await File.ReadAllTextAsync("UserSeedData.json");
                 var users = JsonSerializer.Deserialize<List<AppUser>>(userData);
+                if (users == null) return;
 
                 foreach (var user in users)
                 {
