@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="70px" height="70px" viewBox="0 0 70 70" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 63.1 (92452) - https://sketch.com -->
+    <title>web/svg/ic_flag_ru</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="lang/Q-R/Russian-ru">
+            <g id="ru">
+                <circle id="bg" fill="#D52B1E" cx="35" cy="35" r="34"></circle>
+                <path d="M35,1 C53.7776815,1 69,16.2223185 69,35 C69,39.0988568 68.2746922,43.0283088 66.945421,46.6670118 L3.054579,46.6670118 C1.72530781,43.0283088 1,39.0988568 1,35 C1,16.2223185 16.2223185,1 35,1 Z" id="Combined-Shape" fill="#0039A6"></path>
+                <path d="M35,1 C50.2975756,1 63.2355141,11.1028077 67.5057024,25.0003101 L2.4942976,25.0003101 C6.76448589,11.1028077 19.7024244,1 35,1 Z" id="Combined-Shape" fill="#FFFFFF"></path>
+                <g id="border" fill="#C5C5C2">
+                    <path d="M35,0 C54.3299662,0 70,15.6700338 70,35 C70,54.3299662 54.3299662,70 35,70 C15.6700338,70 0,54.3299662 0,35 C0,15.6700338 15.6700338,0 35,0 Z M35,2 C16.7746033,2 2,16.7746033 2,35 C2,53.2253967 16.7746033,68 35,68 C53.2253967,68 68,53.2253967 68,35 C68,16.7746033 53.2253967,2 35,2 Z"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
