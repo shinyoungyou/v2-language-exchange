@@ -33,7 +33,7 @@ app.UseCsp(opt => opt
     .FontSources(s => s.Self().CustomSources("https://fonts.gstatic.com", "data:"))
     .FormActions(s => s.Self())
     .FrameAncestors(s => s.Self())
-    .ImageSources(s => s.Self().CustomSources("blob:", "https://randomuser.me/", "https://cdn-icons-png.flaticon.com"))
+    .ImageSources(s => s.Self().CustomSources("blob:", "https://randomuser.me/", "https://cdn-icons-png.flaticon.com", "https://languageexchange.blob.core.windows.net/langexstoreimage/blob-06514d0e-fad3-4143-9073-f845aec65448"))
     .ScriptSources(s => s.Self())
 );
 
