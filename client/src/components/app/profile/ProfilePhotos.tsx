@@ -1,7 +1,7 @@
 import { Member, Photo } from "@/models/member";
 import { observer } from "mobx-react-lite";
 import { Header, Image, Icon, Button } from "semantic-ui-react";
-import { SyntheticEvent, useState } from "react";
+import { useState } from "react";
 import { useStore } from "@/stores/store";
 import AddPhotoForm from "@/components/common/imageUpload/AddPhotoForm";
 
@@ -17,13 +17,13 @@ export default observer(function ProfilePhotos({ member }: Props) {
 
   const [target, setTarget] = useState('');
 
-  function handleSetMain(photo: Photo, e: SyntheticEvent<HTMLButtonElement>) {
-    setTarget(e.currentTarget.name);
+  function handleSetMain(photo: Photo) {
+    setTarget(`setMain-${photo.id}`);
     setMainPhoto(photo);
   }
 
-  function handleDeletePhoto(photo: Photo, e: SyntheticEvent<HTMLButtonElement>) {
-    setTarget(e.currentTarget.name);
+  function handleDeletePhoto(photo: Photo) {
+    setTarget(`deletePhoto-${photo.id}`);
     deletePhoto(photo);
   }
 
@@ -41,18 +41,18 @@ export default observer(function ProfilePhotos({ member }: Props) {
             />
             <Button.Group>
               <Button 
-                name={p.id} 
-                // loading={target === p.id && loading}
+                name={`setMain-${p.id}`} 
+                loading={target === `setMain-${p.id}` && loading} 
                 disabled={p.isMain}
-                onClick={e => handleSetMain(p, e)}
+                onClick={_ => handleSetMain(p)}
                 icon>
                 <Icon name="star" color="blue" />
               </Button>
               <Button
-                name={p.id} 
+                name={`deletePhoto-${p.id}`} 
                 disabled={p.isMain}
-                // loading={target === p.id && loading}
-                onClick={e => handleDeletePhoto(p, e)}
+                loading={target === `deletePhoto-${p.id}` && loading}
+                onClick={_ => handleDeletePhoto(p)}
                 icon>
                 <Icon name="delete" color="red" />
               </Button>
