@@ -1,16 +1,16 @@
 import { observer } from "mobx-react-lite";
-import { Segment, Label, Button, Container, Header } from "semantic-ui-react";
-import { ErrorMessage, Form, Formik } from "formik";
+import { Segment, Button, Header } from "semantic-ui-react";
+import { ErrorMessage, Form } from "formik";
 import MyTextInput from "@/components/common/form/MyTextInput";
-import { useStore } from "@/stores/store";
-import * as Yup from "yup";
+// import { useStore } from "@/stores/store";
+// import * as Yup from "yup";
 
 export default observer(function ChangePassword() {
-  const { userStore } = useStore();
+  // const { userStore } = useStore();
 
   return (
     <>
-      <Formik
+      {/* <Formik
         initialValues={{ old: "", new: "", confirm: "", error: null }}
         validationSchema={Yup.object({
           old: Yup.string().required("Old Password is required"),
@@ -27,15 +27,15 @@ export default observer(function ChangePassword() {
             })
             .catch((error) => setErrors({ error: "Invalid password" }))
         }
-      >
-        {({ handleSubmit, isSubmitting, errors, isValid, dirty }) => (
+      > */}
+        {/* {({ handleSubmit, isSubmitting, errors, isValid, dirty }) => ( */}
           <>
             <Segment.Group>
               <Segment>Change Password</Segment>
               <Segment>
                 <Form
                   className="ui form"
-                  onSubmit={handleSubmit}
+                  // onSubmit={handleSubmit}
                   autoComplete="off"
                 >
                   <Header content="Old Password" sub color="teal" />
@@ -57,8 +57,8 @@ export default observer(function ChangePassword() {
                     type="password"
                   />
                   <Button
-                    disabled={!isValid || !dirty || isSubmitting}
-                    loading={isSubmitting}
+                    // disabled={!isValid || !dirty || isSubmitting}
+                    // loading={isSubmitting}
                     positive
                     content="Update Password"
                     type="submit"
@@ -69,18 +69,18 @@ export default observer(function ChangePassword() {
             </Segment.Group>
             <ErrorMessage
               name="error"
-              render={() => (
-                <Label
-                  style={{ marginBottom: 10 }}
-                  basic
-                  color="red"
-                  content={errors.error}
-                />
-              )}
+              // render={() => (
+                // <Label
+                //   style={{ marginBottom: 10 }}
+                //   basic
+                //   color="red"
+                //   content={errors.error}
+                // />
+              // )}
             />
           </>
-        )}
-      </Formik>
+        {/* )} */}
+      {/* </Formik> */}
     </>
   );
 });

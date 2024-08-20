@@ -1,4 +1,4 @@
-import { createBrowserRouter, RouteObject } from 'react-router-dom';
+import { createBrowserRouter, Navigate, RouteObject } from 'react-router-dom';
 
 import ConnectDashboard from '@/components/app/connect/ConnectDashboard';
 import TestErrors from '@/components/errors/TestError';
@@ -38,7 +38,7 @@ export const routes: RouteObject[] = [
             ]},
             {path: 'not-found', element: <NotFound />},
             {path: 'server-error', element: <ServerError />},
-            // {path: '*', element: <Navigate replace to='/not-found' />},
+            {path: '*', element: <Navigate replace to='/not-found' />},
         ]
     }
 ]

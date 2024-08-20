@@ -1,4 +1,3 @@
-import React, { useEffect } from "react";
 import { Card, Icon, Image, Button } from "semantic-ui-react";
 import { observer } from "mobx-react-lite";
 import { Link } from "react-router-dom";

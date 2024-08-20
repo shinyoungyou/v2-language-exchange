@@ -37,7 +37,7 @@ namespace API.Controllers
 
             return CreateUserObject(user);
         }
-                [AllowAnonymous]
+        [AllowAnonymous]
         [HttpPost("register")]
         public async Task<ActionResult<UserDto>> Register(RegisterDto registerDto)
         {

@@ -24,7 +24,7 @@ export default observer(function ProfileBody({ member }: Props) {
     <Tab
       menu={{ secondary: true, pointing: true }}
       panes={panes}
-      onTabChange={(e, data) => setActiveTab(data.activeIndex)}
+      onTabChange={(_, data) => setActiveTab(data.activeIndex)}
       activeIndex={activeTab}
     />
   );

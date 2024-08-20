@@ -1,5 +1,6 @@
 using Application.Core;
 using Application.Interfaces;
+using AutoMapper;
 using FluentValidation;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -11,20 +12,14 @@ namespace Application.Members
     {
         public class Command : IRequest<Result<Unit>>
         {
-            public string DisplayName { get; set; }
-            public string Native { get; set; }
-            public string Learn { get; set; }
-            public string Level { get; set; }
-            public string Bio { get; set; } 
-            public string Interests { get; set; }
+            public Member Member { get; set; }
         }
 
         public class CommandValidator : AbstractValidator<Command>
         {
             public CommandValidator()
             {
-                RuleFor(x => x.DisplayName).NotEmpty();
-                RuleFor(x => x.Native).NotEmpty();
+                RuleFor(x => x.Member).SetValidator(new MemberValidator());
             }
         }
 
@@ -42,18 +37,20 @@ namespace Application.Members
                 var user = await _context.Users.FirstOrDefaultAsync(x =>
                     x.UserName == _userAccessor.GetUsername());
 
-                user.DisplayName = request.DisplayName ?? user.DisplayName;
-                user.Native = request.Native ?? user.Native;
-                user.Learn = request.Learn ?? user.Learn;
-                user.Level = request.Level ?? user.Level;
-                user.Bio = request.Bio;
-                user.Interests = request.Interests;
+                if (user == null) return null;
 
-                var success = await _context.SaveChangesAsync() > 0;
+                user.DisplayName = request.Member.DisplayName ?? user.DisplayName;
+                user.Native = request.Member.Native ?? user.Native;
+                user.Learn = request.Member.Learn ?? user.Learn;
+                user.Level = request.Member.Level ?? user.Level;
+                user.Bio = request.Member.Bio;
+                user.Interests = request.Member.Interests;
 
-                if (success) return Result<Unit>.Success(Unit.Value);
-                
-                return Result<Unit>.Failure("Problem updating profile");
+                var result = await _context.SaveChangesAsync() > 0;
+
+                if (!result) return Result<Unit>.Failure("Problem updating profile");
+
+                return Result<Unit>.Success(Unit.Value);
             }
         }
    

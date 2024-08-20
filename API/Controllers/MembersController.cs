@@ -1,9 +1,11 @@
 using Application.Core;
 using Application.Members;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
 {
+    [Authorize]
     public class MembersController : BaseApiController
     {
         
@@ -19,9 +21,9 @@ namespace API.Controllers
             return HandleResult(await Mediator.Send(new Details.Query { Username = username }));
         }
         [HttpPut]
-        public async Task<IActionResult> Edit(Edit.Command command)
+        public async Task<IActionResult> Edit(Member member)
         {
-            return HandleResult(await Mediator.Send(command));
+            return HandleResult(await Mediator.Send(new Edit.Command { Member = member }));
         }
     }
 }

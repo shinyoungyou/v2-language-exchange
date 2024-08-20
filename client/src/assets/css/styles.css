@@ -94,6 +94,10 @@ html {
     display: none;
   }
 
+  .ui.form .error.message, .ui.form .success.message, .ui.form .warning.message {
+    display: flex;
+  }
+
   .headerMenu .ui.center.aligned.header {
     display: flex;
     justify-content: center;

@@ -1,6 +1,5 @@
 import { observer } from "mobx-react-lite";
-import { Grid, Header, Segment, Button } from "semantic-ui-react";
-import { useStore } from "@/stores/store";
+import { Grid } from "semantic-ui-react";
 import ProfileSettings from "./ProfileSettings";
 import { Member } from "@/models/member";
 import ChangePassword from "./ChangePassword";

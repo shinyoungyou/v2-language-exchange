@@ -1,5 +1,5 @@
 import { observer } from "mobx-react-lite";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import InfiniteScroll from "react-infinite-scroller";
 import { Grid } from "semantic-ui-react";
 import { PagingParams } from "@/models/pagination";
