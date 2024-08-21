@@ -5,6 +5,7 @@ import { router } from '@/routes/Routes';
 import { store } from '@/stores/store';
 import { PaginatedResult } from '@/models/pagination';
 import { Member, Photo } from '@/models/member';
+import { Message } from '@/models/message';
 
 const sleep = (delay: number) => {
     return new Promise((resolve) => {
@@ -101,9 +102,17 @@ const Members = {
     deletePhoto: (id: string) => requests.del(`/photos/${id}`),
 }
 
+const Messages = {
+    // list: (username: string) => requests.get<Message[]>(`/messages/thread/${username}`),
+    listForUser: (params: URLSearchParams) => axios.get<PaginatedResult<Message[]>>(`/messages`, { params })
+        .then(responseBody),
+    delete: (id: number) => requests.del(`/messages/${id}`)
+}
+
 const agent = {
     Account,
-    Members
+    Members,
+    Messages
 }
 
 export default agent;

@@ -11,6 +11,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@emoji-mart/react": "^1.1.1",
+    "@microsoft/signalr": "^8.0.7",
     "axios": "^1.7.4",
     "formik": "^2.2.9",
     "mobx": "^6.7.0",
