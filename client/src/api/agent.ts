@@ -103,7 +103,6 @@ const Members = {
 }
 
 const Messages = {
-    // list: (username: string) => requests.get<Message[]>(`/messages/thread/${username}`),
     listForUser: (params: URLSearchParams) => axios.get<PaginatedResult<Message[]>>(`/messages`, { params })
         .then(responseBody),
     delete: (id: number) => requests.del(`/messages/${id}`)

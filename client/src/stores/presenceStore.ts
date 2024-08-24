@@ -3,6 +3,7 @@ import { makeAutoObservable, runInAction } from "mobx";
 import { store } from "./store";
 import { toast } from 'react-toastify';
 import { router } from '@/routes/Routes';
+import { User } from "@/models/user";
 
 export default class PresenceStore {
     hubConnection: HubConnection | null = null;
@@ -12,10 +13,10 @@ export default class PresenceStore {
         makeAutoObservable(this);
     }
 
-    createHubConnection = () => {
+    createHubConnection = (user: User) => {
         this.hubConnection = new HubConnectionBuilder()
             .withUrl(import.meta.env.VITE_CHAT_URL + '/presence', {
-                accessTokenFactory: () => store.commonStore.token!,
+                accessTokenFactory: () => user.token,
                 transport: HttpTransportType.WebSockets
             })
             .withAutomaticReconnect()

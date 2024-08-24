@@ -31,28 +31,41 @@ namespace Application.Messages
             public async Task<Result<List<MessageDto>>> Handle(Query request, CancellationToken cancellationToken)
             {
                 var currentUserName = _userAccessor.GetUsername();
+                // message: me <-> the other user
                 var query = _context.Messages
                     .Where(
-                        m => m.RecipientUsername == currentUserName && m.RecipientDeleted == false &&
-                        m.SenderUsername == request.RecipientUserName ||
-                        m.RecipientUsername == request.RecipientUserName && m.SenderDeleted == false &&
-                        m.SenderUsername == currentUserName
+                        m => 
+                            // message: the other user -> me
+                            m.RecipientUsername == currentUserName && m.RecipientDeleted == false &&
+                            m.SenderUsername == request.RecipientUserName 
+                        ||
+                            // message: me -> the other user
+                            m.RecipientUsername == request.RecipientUserName && m.SenderDeleted == false &&
+                            m.SenderUsername == currentUserName
                     )
                     .OrderBy(m => m.MessageSent)
                     .AsQueryable();
 
+                // message: (the other user → me) && unread
                 var unreadMessages = query.Where(m => m.DateRead == null 
-                    && m.RecipientUsername == currentUserName).ToList();
+                    && m.RecipientUsername == currentUserName);
 
+                // b/c I've read all the messages the other user has sent on the frontend, 
+                // I am now requesting the backend to reflect that I've read the messages.
                 if (unreadMessages.Any())
                 {
                     foreach (var message in unreadMessages)
                     {
                         message.DateRead = DateTime.UtcNow;
                     }
-                }
-                var messages = await query.ProjectTo<MessageDto>(_mapper.ConfigurationProvider).ToListAsync();
 
+                    var result = await _context.SaveChangesAsync() > 0;
+
+                    if (!result) return Result<List<MessageDto>>.Failure("Failed to mark unread as read");
+                }
+                
+                var messages = await query.ProjectTo<MessageDto>(_mapper.ConfigurationProvider).ToListAsync();
+                
                 return Result<List<MessageDto>>.Success(messages);
             }
         }

@@ -32,11 +32,11 @@ namespace Application.Messages
                 
                 _context.Connections.Remove(connection);
                 
-                var success = await _context.SaveChangesAsync() > 0;
+                var result = await _context.SaveChangesAsync() > 0;
 
-                if (success) return Result<Group>.Success(group);
-
-                return Result<Group>.Failure("Failed to remove from group");
+                if (!result) return Result<Group>.Failure("Failed to remove from group");
+                
+                return Result<Group>.Success(group);                
             }
         }
     }

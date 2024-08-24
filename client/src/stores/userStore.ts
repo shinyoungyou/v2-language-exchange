@@ -23,7 +23,7 @@ export default class UserStore {
             store.commonStore.setToken(user.token);
             runInAction(() => this.user = user);
             store.memberStore.setUserParams(new UserParams(this.user!));
-            store.presenceStore.createHubConnection();
+            store.presenceStore.createHubConnection(user);
             router.navigate('/connect');
             store.modalStore.closeModal();
         } catch (error) {
@@ -46,7 +46,7 @@ export default class UserStore {
             
             runInAction(() => this.user = user);
             store.memberStore.setUserParams(new UserParams(this.user!));
-            store.presenceStore.createHubConnection();
+            store.presenceStore.createHubConnection(user);
         } catch (error) {
             console.log(error);
         }
@@ -60,7 +60,7 @@ export default class UserStore {
             store.commonStore.setToken(user.token);
             runInAction(() => this.user = user);
             store.memberStore.setUserParams(new UserParams(this.user!));
-            store.presenceStore.createHubConnection();
+            store.presenceStore.createHubConnection(user);
             router.navigate('/connect');
             store.modalStore.closeModal();
         } catch (error) {

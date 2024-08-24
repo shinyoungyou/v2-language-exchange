@@ -43,12 +43,11 @@ namespace Application.Messages
 
                 group.Connections.Add(connection);
 
-                var success = await _context.SaveChangesAsync() > 0;
+                var result = await _context.SaveChangesAsync() > 0;
                 
-                if (success) return Result<Group>.Success(group);
-
-                return Result<Group>.Failure("Failed to add to group");
+                if (!result) return Result<Group>.Failure("Failed to add to group");
                 
+                return Result<Group>.Success(group);                
             }
 
             private string GetGroupName(string caller, string other)
