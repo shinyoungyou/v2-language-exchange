@@ -50,7 +50,7 @@ namespace Application.Messages
                 var unreadMessages = query.Where(m => m.DateRead == null 
                     && m.RecipientUsername == currentUserName);
 
-                // b/c I've read all the messages the other user has sent on the frontend, 
+                // b/c I've read all the messages the other user has sent on the chat room, 
                 // I am now requesting the backend to reflect that I've read the messages.
                 if (unreadMessages.Any())
                 {

@@ -4,6 +4,7 @@ import agent from "../api/agent";
 import { Message, Group } from "@/models/message";
 import { store } from "./store";
 import { Pagination, PagingParams } from "@/models/pagination";
+import { toast } from "react-toastify";
 
 export default class MessageStore {
     hubConnection: HubConnection | null = null;
@@ -13,6 +14,7 @@ export default class MessageStore {
     container: string = "Unread";
     activeTab: number = 0;
     loadingInitial = false;
+    deleteLoading = false;
 
     constructor() {
         makeAutoObservable(this); 
@@ -108,6 +110,18 @@ export default class MessageStore {
         }
     };
 
+    deleteMessage = async (id: number) => {
+        this.deleteLoading = true;
+        try {
+            await agent.Messages.delete(id);
+        } catch (error) {
+            console.log(error);
+            toast.error("Problem deleting message");
+        } finally {
+            this.deleteLoading = false;
+        }
+    }
+
     setPagination = (pagination: Pagination) => {
         this.pagination = pagination;
     }
@@ -118,14 +132,6 @@ export default class MessageStore {
 
     setPagingParams = (pagingParams: PagingParams) => {
         this.pagingParams = pagingParams;
-    }
-
-    deleteMessage = async (id: number) => {
-        try {
-            await agent.Messages.delete(id);
-        } catch (error) {
-            console.log(error);
-        }
     }
 
     setActiveTab = (activeTab: any) => {  

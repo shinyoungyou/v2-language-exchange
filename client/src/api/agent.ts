@@ -24,7 +24,7 @@ axios.interceptors.request.use(config => {
 })
 
 axios.interceptors.response.use(async response => {
-    if (import.meta.env.DEV) await sleep(1000);    
+    if (import.meta.env.DEV) await sleep(100);    
     const pagination = response.headers['pagination'];
     if (pagination) {
         response.data = new PaginatedResult(response.data, JSON.parse(pagination));
