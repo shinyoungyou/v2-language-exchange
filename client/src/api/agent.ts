@@ -6,6 +6,7 @@ import { store } from '@/stores/store';
 import { PaginatedResult } from '@/models/pagination';
 import { Member, Photo } from '@/models/member';
 import { Message } from '@/models/message';
+import { Creds } from '@/models/creds';
 
 const sleep = (delay: number) => {
     return new Promise((resolve) => {
@@ -83,6 +84,10 @@ const Account = {
     current: () => requests.get<User>('/account'),
     login: (user: UserFormValues) => requests.post<User>('/account/login', user),
     register: (user: UserFormValues) => requests.post<User>('/account/register', user),
+    google: (accessToken: string) => 
+        requests.post<User>(`/account/google?accessToken=${accessToken}`, {}),
+    complete: (user: any) => requests.post<User>('/account/complete', user),
+    changePassword: (creds: Creds) => requests.patch<User>(`/account/password`, creds),
 }
 
 const Members = {

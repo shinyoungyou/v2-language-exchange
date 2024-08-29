@@ -94,14 +94,19 @@ export default class MessageStore {
     }
 
     loadMessages = async () => {
-        this.loadingInitial = true;
+        this.setLoadingInitial(true);
         try {
             const result = await agent.Messages.listForUser(this.axiosParams);
-            if (result.data === undefined) return;
-            
+            if (result.data !== undefined) {
                 this.messages = result.data;
-            if (result.pagination === undefined) return;
-            this.setPagination(result.pagination);
+            } else {
+                this.messages = []
+            }                
+            if (result.pagination !== undefined) {
+                this.setPagination(result.pagination);
+            } else {
+                this.setPagination(null);
+            }
             this.setLoadingInitial(false);
         } catch (error) {
             console.log(error);
@@ -121,7 +126,7 @@ export default class MessageStore {
         }
     }
 
-    setPagination = (pagination: Pagination) => {
+    setPagination = (pagination: Pagination | null) => {
         this.pagination = pagination;
     }
     

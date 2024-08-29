@@ -11,6 +11,7 @@ import {
 import { useStore } from "@/stores/store";
 import LoginForm from "@/components/auth/login/LoginForm";
 import Register from "@/components/auth/register/Register";
+import { GoogleLogin } from "@react-oauth/google";
 
 import HomeAbout from "@/components/home/AboutPage";
 import logo from "@/assets/img/logo.png";
@@ -94,6 +95,20 @@ export default observer(function HomePage() {
                             <Divider horizontal inverted>
                                 Or
                             </Divider>
+                            <div className="googleLogin">
+                                <GoogleLogin
+                                    locale="en-US"
+                                    onSuccess={(response: any) => {
+                                        userStore.googleLogin(
+                                            response.credential
+                                        );
+                                        console.log("login success", response);
+                                    }}
+                                    onError={() => {
+                                        console.log("Login failed");
+                                    }}
+                                />
+                            </div>
                         </>
                     )}
                 </Container>
