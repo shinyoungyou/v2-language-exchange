@@ -23,6 +23,7 @@ export default class UserStore {
             store.commonStore.setToken(user.token);
             runInAction(() => this.user = user);
             store.memberStore.setUserParams(new UserParams(this.user!));
+            store.presenceStore.createHubConnection(user);
             router.navigate('/connect');
             store.modalStore.closeModal();
         } catch (error) {
@@ -32,6 +33,7 @@ export default class UserStore {
 
     logout = () => {
         store.commonStore.setToken(null);
+        store.presenceStore.stopHubConnection();
         this.user = null;
         router.navigate('/');
     }
@@ -40,9 +42,11 @@ export default class UserStore {
         try {
             const user = await agent.Account.current();
             console.log(user);
+            store.commonStore.setToken(user.token);
             
             runInAction(() => this.user = user);
             store.memberStore.setUserParams(new UserParams(this.user!));
+            store.presenceStore.createHubConnection(user);
         } catch (error) {
             console.log(error);
         }
@@ -56,6 +60,7 @@ export default class UserStore {
             store.commonStore.setToken(user.token);
             runInAction(() => this.user = user);
             store.memberStore.setUserParams(new UserParams(this.user!));
+            store.presenceStore.createHubConnection(user);
             router.navigate('/connect');
             store.modalStore.closeModal();
         } catch (error) {

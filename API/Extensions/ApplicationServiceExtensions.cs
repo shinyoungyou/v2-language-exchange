@@ -1,4 +1,5 @@
 using API.Services;
+using API.SignalR;
 using Application.Core;
 using Application.Interfaces;
 using Application.Members;
@@ -56,6 +57,9 @@ namespace API.Extensions
             services.AddScoped<IUserAccessor, UserAccessor>();
             services.AddScoped<IPhotoAccessor, PhotoAccessor>();
             services.Configure<AzureBlobStorage>(config.GetSection("AzureBlobStorage"));
+            services.AddScoped<LogUserActivity>();
+            services.AddSignalR();
+            services.AddSingleton<PresenceTracker>();
    
             return services;
         }

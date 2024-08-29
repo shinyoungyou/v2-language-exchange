@@ -4,11 +4,12 @@ import { useStore } from "@/stores/store";
 import { Comment } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 import { NativeFlag, LearnFlag } from "@/components/common/options/flagHelper";
-import user_avatar from "@/assets/img/user.png"
+import user_avatar from "@/assets/img/user.png";
 
-export default observer(function MemberList() {
-  const { memberStore } = useStore();
+export default observer(function ActivityList() {
+  const { memberStore, presenceStore } = useStore();
   const { members } = memberStore;
+  const { onlineUsers } = presenceStore;
 
   return (
     <div className="memberListWrapper">
@@ -16,11 +17,14 @@ export default observer(function MemberList() {
       {members.map((member) => (
         <Comment key={member.username} className="memberListItem">
           <Comment.Avatar
-            src={member.photoUrl || user_avatar}
+            src={
+              member.photoUrl ||
+              user_avatar
+            }
           />
           <Comment.Content>
             <Comment.Author as={Link} to={`/members/${member.username}`}>
-              { (
+              {onlineUsers.includes(member.username) && (
                 <Label circular color="olive" empty />
               )}{" "}
               {member.displayName}

@@ -13,6 +13,7 @@ import ProfilePage from '@/components/app/profile/ProfilePage';
 import MessageDashboard from '@/components/app/messages/MessageDashboard';
 import LocationDashboard from '@/components/app/location/LocationDashboard';
 import AboutPage from '@/components/home/AboutPage';
+import ConnectMessage from '@/components/app/connect/ConnectMessage';
 
 export const routes: RouteObject[] = [
     {
@@ -25,6 +26,7 @@ export const routes: RouteObject[] = [
                     element: <Main />,
                     children: [
                         {path: 'messages', element: <MessageDashboard key='all'/>},
+                        {path: 'messages/unread', element: <MessageDashboard key='unread' />},
                         {path: 'connect', element: <ConnectDashboard />},
                         {path: 'location', element: <LocationDashboard />},
                         {path: 'about', element: <AboutPage />},
@@ -33,7 +35,7 @@ export const routes: RouteObject[] = [
                 },
                
                 {path: 'members/:username', element: <ProfilePage />},
-                // {path: 'members/:username/messages', element: <ConnectMessage />},
+                {path: 'members/:username/messages', element: <ConnectMessage />},
                 {path: 'edit/:username', element: <EditPage />},
             ]},
             {path: 'not-found', element: <NotFound />},
