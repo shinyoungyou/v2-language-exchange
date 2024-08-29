@@ -13,6 +13,7 @@ import {
     languageOptions,
     levelOptions,
 } from "@/components/common/options/categoryOptions";
+import ReCAPTCHA from "react-google-recaptcha";
 
 interface InitialValues {
     displayName: string;
@@ -34,6 +35,12 @@ export default observer(function Register() {
     const { user } = userStore;
 
     const [percent, setPercent] = useState(user === null ? 25 : 50);
+
+    const [captchaIsDone, setCaptchaIsDone] = useState(false);
+
+    const onChange = () => {
+        setCaptchaIsDone(true);
+    };
 
     const initialValues = {
         displayName: "",
@@ -121,6 +128,11 @@ export default observer(function Register() {
                                 });
                         } else {
                             console.log("complete ?");
+
+                            userStore.complete(values).catch((error) => {
+                                setPercent(25);
+                                setErrors({ error });
+                            });
                         }
                     }}
                     validationSchema={
@@ -261,6 +273,15 @@ export default observer(function Register() {
                                         name="level"
                                         placeholder={`${values.learn} Level`}
                                     />
+                                    <div className="reCAPTCHA">
+                                        <ReCAPTCHA
+                                            sitekey={
+                                                import.meta.env
+                                                    .VITE_RECAPTCHA_SITE_KEY as string
+                                            }
+                                            onChange={onChange}
+                                        />
+                                    </div>
                                 </>
                             )}
                             <ErrorMessage
@@ -272,7 +293,10 @@ export default observer(function Register() {
                             {percent < 100 && (
                                 <Button
                                     disabled={
-                                        !isValid || !dirty || isSubmitting
+                                        !isValid ||
+                                        !dirty ||
+                                        isSubmitting ||
+                                        !captchaIsDone
                                     }
                                     loading={errors == null && isSubmitting}
                                     positive
