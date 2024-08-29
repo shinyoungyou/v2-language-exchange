@@ -260,7 +260,7 @@ html {
     margin-right: 1rem;
   }
 
-  .messageWrapper .text {
+  .messageWrapper .comment .text {
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
@@ -269,16 +269,18 @@ html {
     border-radius: 1.5rem;
   }
 
+
   .messageTo {
     display: flex;
     flex-direction: row-reverse;
+    align-items: center;
   }
 
-  .messageFrom .text {
+  .messageFrom .comment .text {
     background-color: #f0f0f0;
   }
  
-  .messageTo .text {
+  .messageTo .comment .text {
     background-color: #65c5da;
     color: white !important; 
   }
@@ -295,24 +297,6 @@ html {
   .messageTo .translatedText {
     border-top: 1px solid #f0f0f0;
   }
-  .translateIcon img {
-    width: 1.5rem !important;
-  }
-  .messageWrapper .translateIcon.ui.basic.button {
-    background-color: white !important;
-    position: absolute !important;
-    bottom: 0;
-  }
-
-  .messageFrom .translateIcon.ui.basic.button {
-    right: 0;
-    transform: translate(50%, 50%);
-  }
-
-  .messageTo .translateIcon.ui.basic.button {
-    left: 0;
-    transform: translate(-50%, 50%);
-  }
 
   .messageWrapper .content {
     position: relative;
@@ -320,12 +304,21 @@ html {
   .messageTo .check.icon {
     float: right;
   }
-  .messageWrapper .text .translateIcon {
-    opacity: 0.4;
-    transition: 0.4s;
+
+  .messageWrapper.messageTo .dropdown {
+    margin-right: 0.3rem;
   }
-  .messageWrapper .text:hover .translateIcon {
-    opacity: 1;
+  .messageWrapper.messageFrom .dropdown {
+    margin-left: 0.5rem;
+  }
+
+  .messageWrapper .dropdown .menu>.item {
+    display: flex;
+    align-items: center;
+  }
+
+  .messageWrapper .dropdown .menu>.item>img.image {
+    width: 1.1rem;
   }
 
   .emoji-icon {

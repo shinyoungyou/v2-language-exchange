@@ -3,13 +3,10 @@ import { observer } from "mobx-react-lite";
 import {
   Grid,
   Header,
-  // Flag,
-  // Image,
   Icon,
   Segment,
   Label,
 } from "semantic-ui-react";
-// import ProfileFollow from "./ProfileFollow";
 import { NativeFlag, LearnFlag } from "@/components/common/options/flagHelper";
 import { format, formatDistanceToNow } from "date-fns";
 

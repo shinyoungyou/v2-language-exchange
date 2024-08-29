@@ -116,11 +116,13 @@ export default class memberStore {
           this.member = { ...this.member, ...member } as Member
         };
         this.loading = false;
+        // toast.success("Profile updated!");
+        toast.info("Profile updated!");
       });
     } catch (error: any) {
       console.log(error);
       runInAction(() => (this.loading = false));
-      toast.error("Problem updating member");
+      toast.error("Problem updating profile");
       throw error;
     }
   };
