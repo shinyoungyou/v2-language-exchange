@@ -50,7 +50,7 @@ app.UseCsp(opt => opt
                        "https://www.google.com/recaptcha/api.js", 
                        "https://www.gstatic.com")) // Added gstatic.com for reCAPTCHA
     .ConnectSources(s => s.Self()
-        .CustomSources("https://api.mymemory.translated.net"))
+        .CustomSources("https://accounts.google.com", "https://apis.google.com", "https://api.mymemory.translated.net"))
 );
 
 if (app.Environment.IsDevelopment())
