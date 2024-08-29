@@ -32,7 +32,7 @@ app.UseCsp(opt => opt
     .BlockAllMixedContent()
     .StyleSources(s => s.Self()
         .CustomSources("https://fonts.googleapis.com", "https://accounts.google.com/gsi/style")
-        .UnsafeInline()) // Allow inline styles (use with caution)
+        .UnsafeInline())
     .FontSources(s => s.Self()
         .CustomSources("https://fonts.gstatic.com", "data:"))
     .FormActions(s => s.Self())
@@ -47,8 +47,10 @@ app.UseCsp(opt => opt
                        "https://www.tandem.net"))
     .ScriptSources(s => s.Self()
         .CustomSources("https://accounts.google.com", 
-                       "https://www.google.com/recaptcha/api.js"))
-    .ConnectSources(s => s.Self()) // ensure WebSocket connections are allowed from self
+                       "https://www.google.com/recaptcha/api.js", 
+                       "https://www.gstatic.com")) // Added gstatic.com for reCAPTCHA
+    .ConnectSources(s => s.Self()
+        .CustomSources("https://api.mymemory.translated.net"))
 );
 
 if (app.Environment.IsDevelopment())
