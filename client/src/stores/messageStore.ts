@@ -1,4 +1,4 @@
-import { HttpTransportType, HubConnection, HubConnectionBuilder, LogLevel } from "@microsoft/signalr";
+import { HubConnection, HubConnectionBuilder, LogLevel } from "@microsoft/signalr";
 import { makeAutoObservable, reaction, runInAction } from "mobx";
 import agent from "../api/agent";
 import { Message, Group } from "@/models/message";
@@ -44,7 +44,6 @@ export default class MessageStore {
         this.hubConnection = new HubConnectionBuilder()
             .withUrl(import.meta.env.VITE_CHAT_URL + '/message?user=' + otherUsername, {
                 accessTokenFactory: () => store.userStore.user?.token!,
-                transport: HttpTransportType.WebSockets
             })
             .withAutomaticReconnect()
             .configureLogging(LogLevel.Information)

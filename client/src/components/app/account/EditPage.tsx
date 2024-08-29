@@ -9,27 +9,31 @@ import { Container } from "semantic-ui-react";
 import ProfileHeader from "@/components/app/profile/ProfileHeader";
 
 export default observer(function EditPage() {
-  const { username } = useParams();
-  const { memberStore, userStore: { user } } = useStore();
-  const { loadingMember, loadMember, member } = memberStore;
+    const { username } = useParams();
+    const {
+        memberStore,
+        userStore: { user },
+    } = useStore();
+    const { loadingMember, loadMember, member } = memberStore;
 
-  useEffect(() => {
-    if (username) loadMember(username);
-  }, [loadMember, username]);
+    useEffect(() => {
+        if (username) loadMember(username);
+    }, [loadMember, username]);
 
-  if (loadingMember)
-    return <LoadingComponent inverted content="Loading profile..." />;
+    if (loadingMember)
+        return <LoadingComponent inverted content="Loading profile..." />;
 
-  if (member === null) return <h2>Problem loading profile</h2>;
-  if (member?.username !== user?.username) return <h2>Problem loading profile</h2>;
+    if (member === null) return <h2>Problem loading profile</h2>;
+    if (member?.username !== user?.username)
+        return <h2>Problem loading profile</h2>;
 
-  return (
-    <>
-      <HeaderDetail member={member} />
-      <Container style={{ paddingTop: "7em" }}>
-        <ProfileHeader member={member} isEdit={true} />
-        <EditProfile member={member} />
-      </Container>
-    </>
-  );
+    return (
+        <>
+            <HeaderDetail member={member} />
+            <Container style={{ paddingTop: "7em" }}>
+                <ProfileHeader member={member} isEdit={true} />
+                <EditProfile member={member} />
+            </Container>
+        </>
+    );
 });

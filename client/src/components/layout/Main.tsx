@@ -4,15 +4,15 @@ import { Outlet } from "react-router-dom";
 import HeaderMenu from "./HeaderMenu";
 
 function Main() {
-  return (
-    <>
-      <HeaderMenu content={"Connect"}/>
-      <div style={{ padding: "5em 0" }}>
-        <Outlet />
-      </div>
-      <NavBar />
-    </>
-  );
+    return (
+        <>
+            <HeaderMenu content={"Connect"} />
+            <div style={{ padding: "5em 0" }}>
+                <Outlet />
+            </div>
+            <NavBar />
+        </>
+    );
 }
 
 export default observer(Main);
