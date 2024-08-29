@@ -72,6 +72,8 @@ export default observer(function MessageContent({ message, direction }: Props) {
                             </div>
                         )}
                     </Comment.Text>
+                    {direction === "to" && <Icon name="check" color={message.dateRead 
+                  ? "green" : "grey"} />}
                 </Comment.Content>
             </Comment>
             <Dropdown

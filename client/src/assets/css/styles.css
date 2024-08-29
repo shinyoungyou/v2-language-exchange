@@ -284,6 +284,10 @@ html {
         color: white !important;
     }
 
+    .messageTo .check.icon {
+        margin-bottom: 0.5rem;
+    }
+
     .messageWrapper .translatedText {
         margin-top: 1rem;
         padding-top: 1rem;
