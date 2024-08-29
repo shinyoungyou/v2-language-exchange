@@ -30,6 +30,8 @@ jobs:
           touch .env
           echo VITE_API_URL=${{ secrets.VITE_API_URL }} >> .env
           echo VITE_CHAT_URL=${{ secrets.VITE_CHAT_URL }} >> .env
+          echo VITE_GOOGLE_CLIENT_ID=${{ secrets.VITE_GOOGLE_CLIENT_ID }} >> .env
+          echo VITE_RECAPTCHA_SITE_KEY=${{ secrets.VITE_RECAPTCHA_SITE_KEY }} >> .env
           cat .env
 
       - name: Install deps and build react app
