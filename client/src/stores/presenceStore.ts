@@ -21,7 +21,6 @@ export default class PresenceStore {
         this.hubConnection = new HubConnectionBuilder()
             .withUrl(import.meta.env.VITE_CHAT_URL + "/presence", {
                 accessTokenFactory: () => user.token,
-                transport: HttpTransportType.WebSockets,
             })
             .withAutomaticReconnect()
             .configureLogging(LogLevel.Information)

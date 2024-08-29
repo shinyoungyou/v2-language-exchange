@@ -44,7 +44,6 @@ export default class MessageStore {
         this.hubConnection = new HubConnectionBuilder()
             .withUrl(import.meta.env.VITE_CHAT_URL + '/message?user=' + otherUsername, {
                 accessTokenFactory: () => store.userStore.user?.token!,
-                transport: HttpTransportType.WebSockets
             })
             .withAutomaticReconnect()
             .configureLogging(LogLevel.Information)
