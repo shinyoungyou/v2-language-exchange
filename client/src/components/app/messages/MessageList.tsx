@@ -9,9 +9,9 @@ export default observer(function MessageList() {
 
     return (
         <Comment.Group>
-            {messages.map((message) => (
+            {messages.length > 0 ? messages.map((message) => (
                 <MessageListItem key={message.id} message={message} />
-            ))}
+            )): "Start talking!"}
         </Comment.Group>
     );
 });
