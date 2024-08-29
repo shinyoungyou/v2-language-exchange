@@ -6,60 +6,58 @@ import MessageList from "./MessageList";
 import LoadingComponent from "@/components/layout/LoadingComponent";
 
 export default observer(function MessageDashboard() {
-  const { messageStore } = useStore();
-  const {
-    loadMessages,
-    activeTab,
-    setActiveTab,
-    loadingInitial,
-  } = messageStore;
+    const { messageStore } = useStore();
+    const { loadMessages, activeTab, setActiveTab, loadingInitial } =
+        messageStore;
 
-  useEffect(() => {
-    loadMessages();
-  }, [loadMessages]);
+    useEffect(() => {
+        loadMessages();
+    }, [loadMessages]);
 
-  if (loadingInitial)
-    return <LoadingComponent inverted content="Loading profile..." />;
+    if (loadingInitial)
+        return <LoadingComponent inverted content="Loading profile..." />;
 
-  const panes = [
-    {
-      menuItem: "Unread messages",
-      render: () => (
-        <Tab.Pane>
-          <MessageList />
-        </Tab.Pane>
-      ),
-    },
-    {
-      menuItem: "Inbox messages",
-      render: () => (
-        <Tab.Pane>
-          <MessageList />
-        </Tab.Pane>
-      ),
-    },
-    {
-      menuItem: "Outbox messages",
-      render: () => (
-        <Tab.Pane>
-          <MessageList />
-        </Tab.Pane>
-      ),
-    },
-  ];
+    const panes = [
+        {
+            menuItem: "Unread messages",
+            render: () => (
+                <Tab.Pane>
+                    <MessageList />
+                </Tab.Pane>
+            ),
+        },
+        {
+            menuItem: "Inbox messages",
+            render: () => (
+                <Tab.Pane>
+                    <MessageList />
+                </Tab.Pane>
+            ),
+        },
+        {
+            menuItem: "Outbox messages",
+            render: () => (
+                <Tab.Pane>
+                    <MessageList />
+                </Tab.Pane>
+            ),
+        },
+    ];
 
-  return (
-    <Grid container stackable className="messageDashboard">
-      <Grid.Row>
-        <Grid.Column width={16}>
-          <Tab
-            menu={{ secondary: true, pointing: true }}
-            panes={panes}
-            onTabChange={(_, data) => setActiveTab(data.activeIndex)}
-            activeIndex={activeTab}
-          />
-        </Grid.Column>
-      </Grid.Row>
-    </Grid>
-  );
+    return (
+        <Grid container stackable className="messageDashboard">
+            <Grid.Row>
+                <Grid.Column width={16}>
+                    <Tab
+                        menu={{ secondary: true, pointing: true }}
+                        panes={panes}
+                        onTabChange={(_, data) =>
+                            setActiveTab(data.activeIndex)
+                        }
+                        activeIndex={activeTab}
+                    />
+                </Grid.Column>
+            </Grid.Row>
+        </Grid>
+    );
 });
