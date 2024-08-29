@@ -2,6 +2,7 @@ using System.Text;
 using API.Services;
 using Domain;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
 using Persistence;
 
@@ -16,7 +17,8 @@ namespace API.Extensions
             {
                 opt.Password.RequireNonAlphanumeric = false;
             })
-                .AddEntityFrameworkStores<DataContext>();
+                .AddEntityFrameworkStores<DataContext>()
+                .AddDefaultTokenProviders();
 
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config["TokenKey"]));
             
@@ -43,6 +45,11 @@ namespace API.Extensions
                             return Task.CompletedTask;
                         }
                     };
+                })
+                .AddGoogle(opt =>
+                {
+                    opt.ClientId = config["Google:ClientId"];
+                    opt.ClientSecret = config["Google:ClientSecret"];
                 });
 
             
