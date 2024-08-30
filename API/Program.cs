@@ -49,7 +49,8 @@ app.UseCsp(opt => opt
         .CustomSources("https://accounts.google.com", 
                        "https://www.google.com/recaptcha/api.js", 
                        "https://www.gstatic.com",
-                       "https://apis.google.com"))
+                       "https://apis.google.com",
+                       "https://maps.googleapis.com"))
     .ConnectSources(s => s.Self()
         .CustomSources("https://accounts.google.com", "https://apis.google.com", "https://api.mymemory.translated.net"))
 );
