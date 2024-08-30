@@ -30,12 +30,28 @@ app.UseXXssProtection(opt => opt.EnabledWithBlockMode());
 app.UseXfo(opt => opt.Deny());
 app.UseCsp(opt => opt
     .BlockAllMixedContent()
-    .StyleSources(s => s.Self().CustomSources("https://fonts.googleapis.com"))
-    .FontSources(s => s.Self().CustomSources("https://fonts.gstatic.com", "data:"))
+    .StyleSources(s => s.Self()
+        .CustomSources("https://fonts.googleapis.com", "https://accounts.google.com/gsi/style")
+        .UnsafeInline())
+    .FontSources(s => s.Self()
+        .CustomSources("https://fonts.gstatic.com", "data:"))
     .FormActions(s => s.Self())
     .FrameAncestors(s => s.Self())
-    .ImageSources(s => s.Self().CustomSources("blob:", "https://randomuser.me/", "https://cdn-icons-png.flaticon.com", "https://languageexchange.blob.core.windows.net", "data:", "https://lh3.googleusercontent.com"))
-    .ScriptSources(s => s.Self())
+    .ImageSources(s => s.Self()
+        .CustomSources("blob:", 
+                       "https://randomuser.me/", 
+                       "https://cdn-icons-png.flaticon.com", 
+                       "https://languageexchange.blob.core.windows.net", 
+                       "data:", 
+                       "https://lh3.googleusercontent.com", 
+                       "https://www.tandem.net"))
+    .ScriptSources(s => s.Self()
+        .CustomSources("https://accounts.google.com", 
+                       "https://www.google.com/recaptcha/api.js", 
+                       "https://www.gstatic.com",
+                       "https://apis.google.com"))
+    .ConnectSources(s => s.Self()
+        .CustomSources("https://accounts.google.com", "https://apis.google.com", "https://api.mymemory.translated.net"))
 );
 
 if (app.Environment.IsDevelopment())

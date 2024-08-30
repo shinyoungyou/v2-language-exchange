@@ -95,7 +95,9 @@ export default class UserStore {
             })
             store.memberStore.setUserParams(new UserParams(this.user!));
             store.presenceStore.createHubConnection(user);
-            router.navigate('/connect');
+            if (user.gender === 'Female' || 'Male') {
+                router.navigate('/connect');
+            }
         } catch (error) {
             console.log(error);
             
