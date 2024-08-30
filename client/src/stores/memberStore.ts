@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 import { store } from "./store";
 import { UserParams } from "@/models/userParams";
 import { Pagination, PagingParams } from "@/models/pagination";
+import { MemberLocation } from "@/models/location";
 
 export default class memberStore {
     members: Member[] = [];
@@ -19,6 +20,7 @@ export default class memberStore {
     pagination: Pagination | null = null;
     pagingParams = new PagingParams();
     activeTab: number = 0;
+    locations: MemberLocation[] = [];
 
     constructor() {
         makeAutoObservable(this);
@@ -212,6 +214,46 @@ export default class memberStore {
         } catch (error) {
             toast.error("Problem deleting photo");
             this.loading = false;
+        }
+    };
+
+    loadLocations = async () => {
+        if (this.members.length > 0) {
+            this.loadingInitial = false;
+        } else {
+            this.loadingInitial = true;
+        }
+        try {
+            const locations = await agent.Members.listLocations();
+            console.log(locations);
+            runInAction(() => {
+                this.locations = locations;
+                this.setLoadingInitial(false);
+            });
+        } catch (error) {
+            console.log(error);
+            this.setLoadingInitial(false);
+        }
+    };
+
+    changeLocation = async (next: { city: string; country: string }) => {
+        this.loading = true;
+        try {
+            await agent.Members.changeLocation(next);
+            runInAction(() => {
+                if (this.member && this.isCurrentUser) {
+                    // this.member = { ...this.member, city: next.city, country: next.country };
+                    this.member.city = next.city;
+                    this.member.country = next.country;
+                }
+                this.loading = false;
+                toast.info("Location updated!");
+            });
+        } catch (error) {
+            console.log(error);
+            runInAction(() => (this.loading = false));
+            toast.error("Problem updating location");
+            throw error;
         }
     };
 }
