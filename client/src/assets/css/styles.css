@@ -402,6 +402,7 @@ html {
 
     .ui.comments .memberListItem.comment .content {
         margin: 0;
+        width: 100%;
     }
     .ui.comments .memberListItem.comment .text {
         color: #a0a0a0;

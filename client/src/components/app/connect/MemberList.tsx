@@ -34,7 +34,7 @@ export default observer(function ActivityList() {
                             </Comment.Metadata>
                             <Comment.Text>
                                 {member.bio
-                                    ? member.bio.slice(0, 100) + "..."
+                                    ? (member.bio.length < 100 ? member.bio : member.bio.slice(0, 100) + "...")
                                     : "No comment"}
                             </Comment.Text>
                             <Comment.Actions>
