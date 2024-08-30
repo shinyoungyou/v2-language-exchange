@@ -7,6 +7,7 @@ import { PaginatedResult } from '@/models/pagination';
 import { Member, Photo } from '@/models/member';
 import { Message } from '@/models/message';
 import { Creds } from '@/models/creds';
+import { MemberLocation } from '@/models/location';
 
 const sleep = (delay: number) => {
     return new Promise((resolve) => {
@@ -105,6 +106,9 @@ const Members = {
     },
     setMainPhoto: (id: string) => requests.post(`/photos/${id}/setMain`, {}),
     deletePhoto: (id: string) => requests.del(`/photos/${id}`),
+
+    listLocations: () => requests.get<MemberLocation[]>('/locations'),
+    changeLocation: (next: {city:string;country:string;}) => requests.patch<User>(`/locations`, next),
 }
 
 const Messages = {
