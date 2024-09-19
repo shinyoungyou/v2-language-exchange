@@ -81,7 +81,7 @@ export default observer(function HomePage() {
                                 size="huge"
                                 inverted
                             >
-                                Login!
+                                Login
                             </Button>
                             <Button
                                 onClick={() =>
